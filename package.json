@@ -1,0 +1,17 @@
+{
+  "name": "react-npm",
+  "version": "1.0.0",
+  "description": "react, webpack, babel playground",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "webpack",
+    "babel",
+    "playground"
+  ],
+  "author": "elassol",
+  "license": "ISC"
+}
