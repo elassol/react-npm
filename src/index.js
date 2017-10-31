@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PanelComponent from './components/PanelComponent';
-
+import './index.less';
 
 
 class App extends Component {

@@ -8,7 +8,6 @@ class WrapOptions extends React.Component {
         <Optionscomponent value="test1" name="Test 1" />
         <Optionscomponent value="test2" name="Test 2" />
         <Optionscomponent value="test3" name="Test 3" />
-        <Optionscomponent value="test4" name="Test 4" />
       </div>
     ) 
   }
