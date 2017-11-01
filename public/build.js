@@ -9758,10 +9758,9 @@ var WrapOptions = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: 'wrapper-content' },
-        _react2.default.createElement(_Optionscomponent2.default, { value: 'test1', name: 'Test 1' }),
-        _react2.default.createElement(_Optionscomponent2.default, { value: 'test2', name: 'Test 2' }),
-        _react2.default.createElement(_Optionscomponent2.default, { value: 'test3', name: 'Test 3' }),
-        _react2.default.createElement(_Optionscomponent2.default, { value: 'test4', name: 'Test 4' })
+        _react2.default.createElement(_Optionscomponent2.default, { value: '#test1', name: 'Test 1' }),
+        _react2.default.createElement(_Optionscomponent2.default, { value: '#test2', name: 'Test 2' }),
+        _react2.default.createElement(_Optionscomponent2.default, { value: '#test3', name: 'Test 3' })
       );
     }
   }]);
@@ -9806,11 +9805,11 @@ var Optionscomponent = function (_Component) {
   }
 
   _createClass(Optionscomponent, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "a",
-        { href: "{this.props.value}" },
+        'a',
+        { href: this.props.value },
         this.props.name
       );
     }

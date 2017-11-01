@@ -1,1 +1,217 @@
-body {color:red;}
+.giftfinder_module {
+
+  @colour-copy: #555;
+  @colour-noths: #0ca6d4;
+  @colour-black: #000;
+  @colour-white: #fff;
+  @colour-blue: #20a7d2;
+  @colour-dark-blue: #0e7c9f;
+
+  .only_mob { display: none!important; }
+  .only_desktop { display: block!important; }
+
+  #background-giftmatcher {
+      display: block;
+      max-width: 2000px;
+      height: 449px;
+      margin: 0 auto;
+      background: #ededed url('https://s3-eu-west-1.amazonaws.com/noths-prod-eu-west-1-campaigns/campaigns/images/gifted-landing-page/bg-gm-nov-17-1280.jpg?v2') no-repeat center center;
+      background-size: cover;
+      overflow: hidden;
+  }
+
+  .wrapper-giftmatcher {
+      display: block;
+      max-width: 960px;
+      height: 449px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+
+    #background-giftmatcher:after {
+
+      content: '';
+      display: block;
+      width: 100%;
+      height: 607px;
+
+      background: rgba(255,255,255,0.9);
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 0;
+      opacity: 0;
+    }
+
+    #background-giftmatcher.active:after {
+      opacity: 1;
+      transition: 0.5s;
+    }
+
+
+
+
+    h2.ttl {
+
+
+      font-size: 23px;
+      font-weight: 300;
+      line-height: 50px;
+
+      text-align: center;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-transform: uppercase;
+    }
+
+
+
+    span.back {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: block;
+      width: 50px;
+      height: 50px;
+      background: url('https://s3-eu-west-1.amazonaws.com/noths-prod-eu-west-1-campaigns/campaigns/images/gifted-landing-page/back-arrow.svg?v2') center center no-repeat;
+      transition: transform 0.2s ease-in-out;
+      will-change: transform;
+      &:hover {
+        cursor: pointer;
+        transform: translateX(-5px);
+        transition: transform 0.2s;
+        transition-timing-function: ease-in-out;
+        will-change: transform;
+      }
+    }
+
+    span.back:after {
+      content: 'back';
+      display: inline-block;
+      font-size: 16px;
+      line-height: 52px;
+      text-transform: uppercase;
+      position: absolute;
+      top: 0;
+      left: 50px;
+    }
+
+
+    span.close {
+      position: absolute;
+      top: 10px;
+      right: 16px;
+      font-size: 32px;
+      line-height: 16px;
+
+      &:hover { cursor: pointer; }
+    }
+
+
+
+    .giftmatcher-nav {
+      position: relative;
+      margin: 59px auto 42px;
+    }
+
+    .panel-footer {
+      display: block;
+      width: 100%;
+      height: auto;
+      padding: 0;
+      margin: 45px auto 49px;
+    }
+
+
+
+    .wrapper-content {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-content: stretch;
+
+      align-items: center;
+      width: 100%;
+      min-height: 180px;
+      margin: 0;
+      padding: 10px 0;
+      text-align: center;
+      overflow: hidden;
+    }
+
+
+    #loading .wrapper-content {
+      display: block;
+    }
+
+    .panel {
+      display: block;
+      width: 940px;
+      height: 450px;
+      padding: 0 10px;
+      float: left;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+    }
+
+    .option-wrapper {
+      padding: 5px;
+      display: inline-table;
+      box-sizing: border-box;
+    }
+
+    .option {
+      display: table-cell;
+      vertical-align: middle;
+      box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        padding: 8px 10px;
+        border: solid 3px #eae8e6;
+        color: black;
+        background-color: #fff;
+        font-size: 15px;
+        line-height: 17px;
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration: none;
+        transition: 0.3s;
+
+        &:hover {
+          color: @colour-blue;
+          border-color: @colour-blue;
+          transform: translate(0,-3px);
+          -webkit-transform: translate(0,-3px); /** Chrome & Safari **/
+          -o-transform: translate(0,-3px); /** Opera **/
+          -moz-transform: translate(0,-3px); /** Firefox **/
+          transition: 0.3s;
+          transition-timing-function: ease-in-out;
+        }
+      }
+
+      .option.current {
+        color: @colour-blue;
+        border-color: @colour-blue;
+      }
+
+      #recipient .option-wrapper {
+        width: 33.333%;
+        height: 150px;
+      }
+
+      #relation .option-wrapper {
+        width: 33.333%;
+        height: 80px;
+      }
+
+      #likes .option-wrapper {
+        width: 20%;
+        height: 80px;
+      }
+
+
+}
