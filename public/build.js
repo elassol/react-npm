@@ -261,6 +261,20 @@ process.umask = function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(16);
+} else {
+  module.exports = __webpack_require__(17);
+}
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
 /**
@@ -297,20 +311,6 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(16);
-} else {
-  module.exports = __webpack_require__(17);
-}
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 3 */
@@ -507,7 +507,7 @@ module.exports = emptyObject;
 
 
 
-var emptyFunction = __webpack_require__(1);
+var emptyFunction = __webpack_require__(2);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -702,7 +702,7 @@ module.exports = ExecutionEnvironment;
  * @typechecks
  */
 
-var emptyFunction = __webpack_require__(1);
+var emptyFunction = __webpack_require__(2);
 
 /**
  * Upstream version of event listener. Does not take into account specific
@@ -965,7 +965,7 @@ module.exports = getActiveElement;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(2);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -973,11 +973,11 @@ var _reactDom = __webpack_require__(18);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _PanelComponent = __webpack_require__(32);
+var _AppWrapper = __webpack_require__(32);
 
-var _PanelComponent2 = _interopRequireDefault(_PanelComponent);
+var _AppWrapper2 = _interopRequireDefault(_AppWrapper);
 
-__webpack_require__(36);
+__webpack_require__(37);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1002,12 +1002,7 @@ var App = function (_Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(
-                    'h2',
-                    null,
-                    'Hello World! Edu'
-                ),
-                _react2.default.createElement(_PanelComponent2.default, null)
+                _react2.default.createElement(_AppWrapper2.default, null)
             );
         }
     }]);
@@ -1016,6 +1011,75 @@ var App = function (_Component) {
 }(_react.Component);
 
 _reactDom2.default.render(_react2.default.createElement(App, null), document.querySelector('#app'));
+
+(function () {
+    console.log("it works");
+
+    // List for the three filters
+    var recipientData = [{ value: 'him', text: 'For him' }, { value: 'her', text: 'For her' }, { value: 'kids', text: 'For a little one or teenager' }];
+
+    var GiftMatcher = {
+        recipient: "",
+        relation: "",
+        likes: ""
+    };
+
+    var recipientPanel = document.getElementById('recipient');
+
+    function RecipientListOptions(list, wrapper) {
+        var navElem = wrapper.querySelector(".wrapper-content");
+        for (var i = 0; i < list.length; i++) {
+            var navItem = document.createElement("a");
+            navItem.className = 'option';
+            var navItemWrapper = document.createElement("div");
+            navItemWrapper.className = 'option-wrapper';
+            // Set properties on anchor
+            navItem.href = list[i].value;
+            navItem.innerHTML = list[i].text;
+            // Add anchor to list item, and list item to list
+            navElem.appendChild(navItemWrapper).appendChild(navItem);
+            // add click Event buttons list
+            navItem.addEventListener('click', function (e) {
+                e.preventDefault();
+                GiftMatcher.recipient = this.value;
+                var currentbutton = this;
+                CurrentButtonClass(navElem, function () {
+                    AddMyClass(currentbutton, 'current');
+                });
+
+                if (this.value === 'kids') {
+                    newtitle = "Who is...";
+                    changeTitle(relationPanel, newtitle);
+                } else {
+                    newtitle = "WHO IS MY...";
+                    changeTitle(relationPanel, newtitle);
+                }
+
+                var nextpanel = relationPanel.querySelector(".wrapper-content");
+
+                if (nextpanel.querySelector(".option")) {
+                    destroyButtons(relationPanel, function () {
+                        console.log(" destroy buttons fire relations list");
+                        RelationListOptions(relationData, GiftMatcher.recipient, relationPanel);
+                    });
+                    AddMyClass(recipientPanel, 'selected');
+                    AddMyClass(relationPanel, 'active');
+                } else {
+                    RelationListOptions(relationData, GiftMatcher.recipient, relationPanel);
+                    AddMyClass(recipientPanel, 'selected');
+                    AddMyClass(relationPanel, 'active');
+                }
+            });
+        }
+
+        BackButtonFunction(wrapper, introPanel, function () {
+            addScroll();
+        });
+        CloseGiftMatcher(wrapper);
+    }
+
+    RecipientListOptions(recipientData, recipientPanel);
+})();
 
 /***/ }),
 /* 16 */
@@ -1036,7 +1100,7 @@ _reactDom2.default.render(_react2.default.createElement(App, null), document.que
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var f = __webpack_require__(4),
-    p = __webpack_require__(5);__webpack_require__(3);var r = __webpack_require__(1);
+    p = __webpack_require__(5);__webpack_require__(3);var r = __webpack_require__(2);
 function t(a) {
   for (var b = arguments.length - 1, d = "Minified React error #" + a + "; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d" + a, e = 0; e < b; e++) {
     d += "\x26args[]\x3d" + encodeURIComponent(arguments[e + 1]);
@@ -1173,7 +1237,7 @@ if (process.env.NODE_ENV !== "production") {
     var require$$0 = __webpack_require__(6);
     var emptyObject = __webpack_require__(5);
     var invariant = __webpack_require__(3);
-    var emptyFunction = __webpack_require__(1);
+    var emptyFunction = __webpack_require__(2);
     var checkPropTypes = __webpack_require__(7);
 
     /**
@@ -2911,10 +2975,10 @@ if (process.env.NODE_ENV === 'production') {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var aa = __webpack_require__(2);__webpack_require__(3);var l = __webpack_require__(9),
+var aa = __webpack_require__(1);__webpack_require__(3);var l = __webpack_require__(9),
     n = __webpack_require__(4),
     ba = __webpack_require__(10),
-    ca = __webpack_require__(1),
+    ca = __webpack_require__(2),
     da = __webpack_require__(5),
     ea = __webpack_require__(11),
     fa = __webpack_require__(12),
@@ -5363,7 +5427,7 @@ module.exports = isNode;
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
- */var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};if(process.env.NODE_ENV!=="production"){(function(){'use strict';var react=__webpack_require__(2);var invariant=__webpack_require__(3);var ExecutionEnvironment=__webpack_require__(9);var _assign=__webpack_require__(4);var EventListener=__webpack_require__(10);var require$$0=__webpack_require__(6);var hyphenateStyleName=__webpack_require__(23);var emptyFunction=__webpack_require__(1);var camelizeStyleName=__webpack_require__(25);var performanceNow=__webpack_require__(27);var propTypes=__webpack_require__(29);var emptyObject=__webpack_require__(5);var checkPropTypes=__webpack_require__(7);var shallowEqual=__webpack_require__(11);var containsNode=__webpack_require__(12);var focusNode=__webpack_require__(13);var getActiveElement=__webpack_require__(14);/**
+ */var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};if(process.env.NODE_ENV!=="production"){(function(){'use strict';var react=__webpack_require__(1);var invariant=__webpack_require__(3);var ExecutionEnvironment=__webpack_require__(9);var _assign=__webpack_require__(4);var EventListener=__webpack_require__(10);var require$$0=__webpack_require__(6);var hyphenateStyleName=__webpack_require__(23);var emptyFunction=__webpack_require__(2);var camelizeStyleName=__webpack_require__(25);var performanceNow=__webpack_require__(27);var propTypes=__webpack_require__(29);var emptyObject=__webpack_require__(5);var checkPropTypes=__webpack_require__(7);var shallowEqual=__webpack_require__(11);var containsNode=__webpack_require__(12);var focusNode=__webpack_require__(13);var getActiveElement=__webpack_require__(14);/**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
  * This source code is licensed under the MIT license found in the
@@ -9025,7 +9089,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var emptyFunction = __webpack_require__(1);
+var emptyFunction = __webpack_require__(2);
 var invariant = __webpack_require__(3);
 var warning = __webpack_require__(6);
 var assign = __webpack_require__(4);
@@ -9548,7 +9612,7 @@ module.exports = function (isValidElement, throwOnDirectAccess) {
 
 
 
-var emptyFunction = __webpack_require__(1);
+var emptyFunction = __webpack_require__(2);
 var invariant = __webpack_require__(3);
 var ReactPropTypesSecret = __webpack_require__(8);
 
@@ -9601,20 +9665,82 @@ module.exports = function () {
 
 
 Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _PanelComponent = __webpack_require__(33);
+
+var _PanelComponent2 = _interopRequireDefault(_PanelComponent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AppWrapper = function (_React$Component) {
+  _inherits(AppWrapper, _React$Component);
+
+  function AppWrapper() {
+    _classCallCheck(this, AppWrapper);
+
+    return _possibleConstructorReturn(this, (AppWrapper.__proto__ || Object.getPrototypeOf(AppWrapper)).apply(this, arguments));
+  }
+
+  _createClass(AppWrapper, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'section',
+        { className: 'giftfinder_module module clearfix' },
+        _react2.default.createElement(
+          'div',
+          { id: 'background-giftmatcher' },
+          _react2.default.createElement(
+            'div',
+            { className: 'wrapper-giftmatcher' },
+            _react2.default.createElement(_PanelComponent2.default, { id: 'recipient' })
+          )
+        )
+      );
+    }
+  }]);
+
+  return AppWrapper;
+}(_react2.default.Component);
+
+exports.default = AppWrapper;
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(2);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _TitleComponent = __webpack_require__(33);
+var _TitleComponent = __webpack_require__(34);
 
 var _TitleComponent2 = _interopRequireDefault(_TitleComponent);
 
-var _WrapOptions = __webpack_require__(34);
+var _WrapOptions = __webpack_require__(35);
 
 var _WrapOptions2 = _interopRequireDefault(_WrapOptions);
 
@@ -9640,9 +9766,14 @@ var PanelComponent = function (_Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { className: 'panel' },
-                _react2.default.createElement(_TitleComponent2.default, { title: 'test my fraking title' }),
-                _react2.default.createElement(_WrapOptions2.default, null)
+                { className: 'panel', id: this.props.id },
+                _react2.default.createElement(_TitleComponent2.default, { title: 'custom title recipient panel' }),
+                _react2.default.createElement(_WrapOptions2.default, null),
+                _react2.default.createElement(
+                    'div',
+                    { 'class': 'panel-footer only_desktop' },
+                    _react2.default.createElement('span', { 'class': 'logo' })
+                )
             );
         }
     }]);
@@ -9653,7 +9784,7 @@ var PanelComponent = function (_Component) {
 exports.default = PanelComponent;
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9665,7 +9796,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(2);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -9715,7 +9846,7 @@ var TitleComponent = function (_React$Component) {
 exports.default = TitleComponent;
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9727,11 +9858,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(2);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Optionscomponent = __webpack_require__(35);
+var _Optionscomponent = __webpack_require__(36);
 
 var _Optionscomponent2 = _interopRequireDefault(_Optionscomponent);
 
@@ -9755,13 +9886,7 @@ var WrapOptions = function (_React$Component) {
   _createClass(WrapOptions, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'wrapper-content' },
-        _react2.default.createElement(_Optionscomponent2.default, { value: '#test1', name: 'Test 1' }),
-        _react2.default.createElement(_Optionscomponent2.default, { value: '#test2', name: 'Test 2' }),
-        _react2.default.createElement(_Optionscomponent2.default, { value: '#test3', name: 'Test 3' })
-      );
+      return _react2.default.createElement('div', { className: 'wrapper-content' });
     }
   }]);
 
@@ -9771,7 +9896,7 @@ var WrapOptions = function (_React$Component) {
 exports.default = WrapOptions;
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9783,7 +9908,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(2);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -9821,13 +9946,13 @@ var Optionscomponent = function (_Component) {
 exports.default = Optionscomponent;
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(37);
+var content = __webpack_require__(38);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -9835,7 +9960,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(39)(content, options);
+var update = __webpack_require__(40)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -9852,21 +9977,21 @@ if(false) {
 }
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(38)(undefined);
+exports = module.exports = __webpack_require__(39)(undefined);
 // imports
 
 
 // module
-exports.push([module.i, "body {\n  color: red;\n}\n", ""]);
+exports.push([module.i, ".giftfinder_module .only_mob {\n  display: none!important;\n}\n.giftfinder_module .only_desktop {\n  display: block!important;\n}\n.giftfinder_module #background-giftmatcher {\n  display: block;\n  max-width: 2000px;\n  height: 449px;\n  margin: 0 auto;\n  background: #ededed url('https://s3-eu-west-1.amazonaws.com/noths-prod-eu-west-1-campaigns/campaigns/images/gifted-landing-page/bg-gm-nov-17-1280.jpg?v2') no-repeat center center;\n  background-size: cover;\n  overflow: hidden;\n}\n.giftfinder_module .wrapper-giftmatcher {\n  display: block;\n  max-width: 960px;\n  height: 449px;\n  margin: 0 auto;\n  position: relative;\n}\n.giftfinder_module #background-giftmatcher:after {\n  content: '';\n  display: block;\n  width: 100%;\n  height: 607px;\n  background: rgba(255, 255, 255, 0.9);\n  position: absolute;\n  left: 0;\n  top: 0;\n  z-index: 0;\n  opacity: 0;\n}\n.giftfinder_module #background-giftmatcher.active:after {\n  opacity: 1;\n  transition: 0.5s;\n}\n.giftfinder_module h2.ttl {\n  font-size: 23px;\n  font-weight: 300;\n  line-height: 50px;\n  text-align: center;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-transform: uppercase;\n}\n.giftfinder_module span.back {\n  position: absolute;\n  left: 0;\n  top: 0;\n  display: block;\n  width: 50px;\n  height: 50px;\n  background: url('https://s3-eu-west-1.amazonaws.com/noths-prod-eu-west-1-campaigns/campaigns/images/gifted-landing-page/back-arrow.svg?v2') center center no-repeat;\n  transition: transform 0.2s ease-in-out;\n  will-change: transform;\n}\n.giftfinder_module span.back:hover {\n  cursor: pointer;\n  transform: translateX(-5px);\n  transition: transform 0.2s;\n  transition-timing-function: ease-in-out;\n  will-change: transform;\n}\n.giftfinder_module span.back:after {\n  content: 'back';\n  display: inline-block;\n  font-size: 16px;\n  line-height: 52px;\n  text-transform: uppercase;\n  position: absolute;\n  top: 0;\n  left: 50px;\n}\n.giftfinder_module span.close {\n  position: absolute;\n  top: 10px;\n  right: 16px;\n  font-size: 32px;\n  line-height: 16px;\n}\n.giftfinder_module span.close:hover {\n  cursor: pointer;\n}\n.giftfinder_module .giftmatcher-nav {\n  position: relative;\n  margin: 59px auto 42px;\n}\n.giftfinder_module .panel-footer {\n  display: block;\n  width: 100%;\n  height: auto;\n  padding: 0;\n  margin: 45px auto 49px;\n}\n.giftfinder_module .wrapper-content {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: center;\n  align-content: stretch;\n  align-items: center;\n  width: 100%;\n  min-height: 180px;\n  margin: 0;\n  padding: 10px 0;\n  text-align: center;\n  overflow: hidden;\n}\n.giftfinder_module #loading .wrapper-content {\n  display: block;\n}\n.giftfinder_module .panel {\n  display: block;\n  width: 940px;\n  height: 450px;\n  padding: 0 10px;\n  float: left;\n  position: absolute;\n  top: 0;\n  right: 0;\n  z-index: 1;\n}\n.giftfinder_module .option-wrapper {\n  padding: 5px;\n  display: inline-table;\n  box-sizing: border-box;\n}\n.giftfinder_module .option {\n  display: table-cell;\n  vertical-align: middle;\n  box-sizing: border-box;\n  width: 100%;\n  height: 100%;\n  padding: 8px 10px;\n  border: solid 3px #eae8e6;\n  color: black;\n  background-color: #fff;\n  font-size: 15px;\n  line-height: 17px;\n  text-transform: uppercase;\n  text-align: center;\n  text-decoration: none;\n  transition: 0.3s;\n}\n.giftfinder_module .option:hover {\n  color: #20a7d2;\n  border-color: #20a7d2;\n  transform: translate(0, -3px);\n  -webkit-transform: translate(0, -3px);\n  /** Chrome & Safari **/\n  -o-transform: translate(0, -3px);\n  /** Opera **/\n  -moz-transform: translate(0, -3px);\n  /** Firefox **/\n  transition: 0.3s;\n  transition-timing-function: ease-in-out;\n}\n.giftfinder_module .option.current {\n  color: #20a7d2;\n  border-color: #20a7d2;\n}\n.giftfinder_module #recipient .option-wrapper {\n  width: 33.333%;\n  height: 150px;\n}\n.giftfinder_module #relation .option-wrapper {\n  width: 33.333%;\n  height: 80px;\n}\n.giftfinder_module #likes .option-wrapper {\n  width: 20%;\n  height: 80px;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9948,7 +10073,7 @@ function toComment(sourceMap) {
 }
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -10004,7 +10129,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(40);
+var	fixUrls = __webpack_require__(41);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -10320,7 +10445,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

@@ -1,9 +1,9 @@
 var path = require('path');
 var HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 // var ExtractTextPlugin = require('extract-text-webpack-plugin');
- 
+
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/components/panel.js',
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'build.js'

@@ -90,3 +90,9 @@ ReactDOM.render( <App />, document.querySelector( '#app' ) );
   RecipientListOptions(recipientData,recipientPanel);
 
 })();
+
+
+
+const hellowworld = word =>  { console.log(word); };
+
+hellowworld('hello Edu');
